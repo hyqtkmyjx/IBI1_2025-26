@@ -1,4 +1,4 @@
-Hello, my name is Rob.
-I like drinking tea and eating chocolate biscuits.
-I am enjoying teaching IBI1 in person again 
+Hello, my name is haoyunqi.
+I like drinking coffee and eating chocolate biscuits (i love it so much!!!!).
+I like to do the researches.
 I am happy that I can push my repo from Visual Studio Code to GitHub
