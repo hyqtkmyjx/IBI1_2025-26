@@ -1,0 +1,4 @@
+Hello, my name is hyq.
+I like drinking coffee and eating chocolate biscuits (I love it so much !).
+I am enjoying learning IBI1 in person again 
+I am happy that I can push my repo from Visual Studio Code to GitHub

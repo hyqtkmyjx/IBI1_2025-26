@@ -1,0 +1,5 @@
+I used the cloning method to copy the teacher's files to my own repository. However, this IBI is the assignment I intended to submit. But the cloning was done in another repository. How can this be resolved?
+
+I used the cloning method to copy the teacher's files to my own repository. However, these files are the ones I actually want to submit as my assignment. But the cloning was done in another repository, so I moved the entire files to this repository.
+
+new try
