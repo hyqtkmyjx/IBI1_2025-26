@@ -1,6 +1,12 @@
-I like getting GitHub to work
-I like music
-I like pork pies
-I like crisps
-I like tea very much
-I like Radio 4
+GEM
+邓紫棋
+GLORIA
+GEM
+邓紫棋
+GLORIA
+GEM
+邓紫棋
+GLORIA
+GEM
+# 删除3项：GEM、GEM、GEM
+# 新增5项：爬山、摄影、喝茶、看书、打羽毛球
