@@ -8,3 +8,4 @@ GEM
 邓紫棋
 GLORIA
 GEM
+邓紫棋
