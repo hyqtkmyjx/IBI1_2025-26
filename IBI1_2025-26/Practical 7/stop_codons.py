@@ -10,7 +10,7 @@ def read_fasta(fasta_file):
     
     return all_genes
 
-def find_in_frame_stop_codons(seq):
+def find_codons(seq):
     start_codon = "ATG"
     stop_codons = {"TAA", "TAG", "TGA"}
     found_stops = set()  # 集合自动去重，（为什么要去重？）
@@ -26,19 +26,18 @@ def find_in_frame_stop_codons(seq):
     
     return found_stops
 
-def write_stop_genes_fasta(genes_dict, output_filename):
+def write_fasta(all_genes, output_fasta):
     #表头格式：>基因名 终止密码子1,终止密码子2,...
-    with open(output_filename, 'w') as f: #打开文件并且暂时起名字为f，方便操作
-        for gene_name, seq in genes_dict.items(): #返回的是一个元组，包含基因名和序列
+    with open(output_fasta, 'w') as f: #打开文件并且暂时起名字为f，方便操作
+        for gene_name, seq in all_genes.items(): #返回的是一个元组，包含基因名和序列
             # 找这个基因是不是有框内终止密码子
-            stops = find_in_frame_stop_codons(seq)
+            stops = find_codons(seq)
             if stops:  # 如果至少有一个终止密码子
                 # list(stops)是为了把集合转换成列表，sorted()是为了排序
                 sorted_stops = sorted(list(stops))
                 # 写header：>基因名 终止密码子
                 f.write(f">{gene_name} {','.join(sorted_stops)}\n")
-                # 写序列（为了好看，每行80个碱基）
-                for i in range(0, len(seq), 80):
+                for i in range(0, len(seq),80):
                     f.write(f"{seq[i:i+80]}\n")
 
 def main():
@@ -46,7 +45,7 @@ def main():
     output_fasta = "stop_genes.fa"
     all_genes = read_fasta(fasta_file) #读取文件，拿到所有基因
     
-    write_stop_genes_fasta(all_genes, output_fasta) #写入新文件
+    write_fasta(all_genes, output_fasta) #写入新文件
     
     # 重新读一下生成的文件，看看有多少个基因
     result_genes = read_fasta(output_fasta)
