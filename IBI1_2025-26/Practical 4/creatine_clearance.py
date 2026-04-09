@@ -1,32 +1,33 @@
-# 程序开始
-# 定义常量：最大年龄、体重范围、肌酐范围、性别常量
-age = 100                     # 年龄上限
-weightmax = 80                # 体重上限
-weightmin = 20                 # 体重下限
-Crmax = 100                   # 血清肌酐上限
-Crmin = 0                     # 血清肌酐下限
-gentle1 = "male"               # 男性标识
-gentle2 = "female"             # 女性标识
+# Start of the program
+# Define constants: maximum age, weight range, creatinine range, gender constants
+age = 100                     # Maximum age
+weightmax = 80                # Maximum weight
+weightmin = 20                # Minimum weight
+Crmax = 100                   # Maximum serum creatinine level
+Crmin = 0                     # Minimum serum creatinine level
+gentle1 = "male"              # Male identifier
+gentle2 = "female"            # Female identifier
 
-# 输入部分
-# 提示用户输入年龄、体重、性别、血清肌酐值，并转换为相应类型
+# Input section
+# Prompt the user to enter age, weight, gender, and serum creatinine level, then convert to corresponding types
 a = int(input("Enter your age: "))
 b = int(input("Enter your weight: "))
 c = input("Enter your gender: ")
 Cr = int(input("Enter your serum creatinine level: "))
 
-# 判断输入值是否超出正常范围
-# 如果年龄超过上限，或体重超出范围，或肌酐超出范围，或性别既不是男性也不是女性，则提示异常
+# Check if input values are outside the normal range
+# If age exceeds the maximum limit, or weight is out of range, or creatinine is out of range, 
+# or gender is neither male nor female, prompt an exception
 if a > age or b > weightmax or b < weightmin or Cr > Crmax or Cr < Crmin or c != gentle1 and c != gentle2 :
     print("Your creatine clearance is not normal")
 else:
-    # 输入值均在正常范围内，开始计算肌酐清除率
+    # All input values are within the normal range, start calculating creatinine clearance rate
     if c == gentle1:
-        # 男性计算公式：(140 - 年龄) * 体重 / (72 * 血清肌酐)
+        # Male calculation formula: (140 - age) * weight / (72 * serum creatinine)
         CrCl = ((140 - a) * b) / (72 * Cr)
     else:
-        # 女性计算公式：男性结果 * 0.85
+        # Female calculation formula: male result * 0.85
         CrCl = ((140 - a) * b) / (72 * Cr) * 0.85
-    # 输出计算结果，保留四位小数
+    # Output the calculation result, keeping four decimal places
     print("Your creatine clearance is %.4f" % CrCl)
-# 程序结束
+# End of the program
