@@ -1,0 +1,13 @@
+ functions：
+
+ 1. np.random.binomial(n, p)： new_infected = np.random.binomial(n=S_num, p=infection_prob)：
+ Among the S_num susceptible individuals, each has an infection probability of infection_prob and will get infected. The total number of infections is returned.
+
+ 2.np.random.choice(arr, size)： outbreak = np.random.choice(range(grid_size), 2)
+ Randomly select a specified number of elements from the designated array:
+
+ 3.random.rand()： np.random.rand() < beta
+ Generate a uniformly distributed random number between 0 and 1, and determine a single random event:
+
+ 4.np.argwhere(condition)： infected_points = np.argwhere(population == 1)
+ Find the indices of all elements in the array that meet the specified conditions:
