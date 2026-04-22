@@ -1,0 +1,11 @@
+1. Research Question
+What is the distribution of DALYs across all countries in 2019?
+
+2. Corresponding Code Line Number
+The code to answer this question starts at line 113 in dalys.py.
+
+3. Result Discussion
+From the histogram and statistical results, we can draw the following conclusions:
+1. The distribution of DALYs across countries in 2019 is significantly right-skewed: most countries have relatively low DALYs values, while only a small number of countries have extremely high disease burden.
+2. The mean DALYs value is higher than the median, which further confirms the right-skewed feature of the distribution.
+3. This result is in line with expectations: countries with large populations and relatively underdeveloped public health systems tend to have higher DALYs, while most small and high-income developed countries have lower overall disease burden.
