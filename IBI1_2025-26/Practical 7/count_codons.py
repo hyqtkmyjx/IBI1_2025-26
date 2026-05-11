@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 
 def read_fasta(fasta_file):
-    "Read the FASTA file and return a dictionary where the keys are gene names and the values are the sequences."
+    """Read FASTA file and return a dictionary {gene_name: sequence}"""
     all_genes = {}
     for record in SeqIO.parse(fasta_file, "fasta"):
         gene_name = record.id.split()[0]
@@ -12,9 +12,9 @@ def read_fasta(fasta_file):
 
 def find_longest_orf_with_stop(seq, target_stop):
     """
-    Find the longest ORF in the sequence that ends with the specified stop codon.
-    Return: The list of codons of the longest ORF (excluding the stop codon)
-    """  
+    Find the longest ORF ending with the specified stop codon
+    Returns: list of codons in the longest ORF (excluding the stop codon)
+    """
     start_codon = "ATG"
     stop_codons = {"TAA", "TAG", "TGA"}
     longest_codons = []
@@ -26,27 +26,28 @@ def find_longest_orf_with_stop(seq, target_stop):
                 codon = seq[j:j+3]
                 if codon in stop_codons:
                     if codon == target_stop:
-                        # Find the target termination codon and update the list of the longest codons
+                        # Update longest codon list if current ORF is longer
                         if len(current_codons) > len(longest_codons):
                             longest_codons = current_codons.copy()
-                    break  # Terminate the current ORF
+                    break  # Terminate current ORF
                 current_codons.append(codon)
     
     return longest_codons
 
 def main():
-    # 1. User inputs termination codon
+    # 1. Get user input for stop codon
     while True:
         target_stop = input("Please enter a stop codon (TAA/TAG/TGA): ").strip().upper()
         if target_stop in {"TAA", "TAG", "TGA"}:
             break
         print("Invalid input! Please enter one of TAA, TAG, TGA.")
-    # 2. Read FASTA file and get all genes
+    
+    # 2. Read FASTA file (absolute path to avoid file not found error)
     fasta_file = "/Users/hyq-mac/Desktop/2026春夏学期资料/IBI/IBI1_2025-26/Practical 7/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa"
     all_genes = read_fasta(fasta_file)
     print(f"Total genes read: {len(all_genes)}")
     
-    # 3. Calculate the frequency of codons
+    # 3. Count frequency of all codons (no merging)
     codon_counts = defaultdict(int)
     total_codons = 0
     
@@ -59,24 +60,37 @@ def main():
     print(f"\nGenes containing {target_stop} stop codon: {len([c for c in codon_counts.values() if c > 0])}")
     print(f"Total codons counted: {total_codons}")
     
-    # 4. Generate pie chart (show only the top 10 most frequent codons, merge the rest as "Others")
+    # 4. Generate full codon frequency pie chart (show all 64 codons)
+    # Sort codons by frequency in descending order
     sorted_codons = sorted(codon_counts.items(), key=lambda x: x[1], reverse=True)
-    top_10 = sorted_codons[:10]
-    others_count = sum(count for _, count in sorted_codons[10:])
+    labels = [codon for codon, _ in sorted_codons]
+    sizes = [count for _, count in sorted_codons]
     
-    labels = [codon for codon, _ in top_10] + ["Others"]
-    sizes = [count for _, count in top_10] + [others_count]
+    # Optimize pie chart to avoid label overlap
+    plt.figure(figsize=(12, 10), dpi=150)
+    wedges, texts, autotexts = plt.pie(
+        sizes,
+        labels=labels,
+        autopct='%1.1f%%',
+        startangle=90,
+        labeldistance=1.05,
+        pctdistance=0.85,
+        textprops={'fontsize': 7}
+    )
     
-    plt.figure(figsize=(10, 8), dpi=150)
-    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
-    plt.title(f"Codon Frequency Upstream of {target_stop} Stop Codon")
-    plt.axis('equal')  # Ensure that the chart is circular
+    # Adjust percentage text style
+    for autotext in autotexts:
+        autotext.set_fontsize(6)
+        autotext.set_color('white')
+    
+    plt.title(f"Full Codon Frequency Upstream of {target_stop} Stop Codon", fontsize=12, fontweight='bold')
+    plt.axis('equal')  # Ensure pie chart is circular
     plt.tight_layout()
     
-    # Save pie chart to file
-    output_file = f"codon_frequency_{target_stop}.png"
-    plt.savefig(output_file, dpi=150)
-    print(f"\nPie chart saved to: {output_file}")
+    # Save high-resolution pie chart to file
+    output_file = f"/Users/hyq-mac/Desktop/2026春夏学期资料/IBI/IBI1_2025-26/Practical 7/codon_frequency_{target_stop}_full.png"
+    plt.savefig(output_file, dpi=150, bbox_inches='tight')  # Prevent label truncation
+    print(f"\nFull codon frequency pie chart saved to: {output_file}")
     plt.show()
 
 if __name__ == "__main__":
