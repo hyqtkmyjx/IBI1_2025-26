@@ -1,3 +1,10 @@
+# Core Process:
+# 1. Copy the current population grid to avoid mutual influence during updates.
+# 2. Find the coordinates of all infected individuals.
+# 3. For each infected individual, check the 8 neighbors.
+# 4. If a neighbor is susceptible, they get infected with a probability of beta.
+# 5. Infected individuals recover with a probability of gamma.
+# 6. Update the population grid and proceed to the next time step.
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -5,7 +12,7 @@ import matplotlib.pyplot as plt
 num_total = 10000  # 100x100 
 grid_size = 100
 beta = 0.3        
-gamma = 0.1        
+gamma = 0.05        
 time_steps = 100
 
 # create 100×100 network：0=S，1=I， 2=R

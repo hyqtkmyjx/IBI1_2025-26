@@ -7,7 +7,7 @@ I_num = 1
 S_num = num_total - I_num
 R_num = 0
 beta = 0.3
-gamma = 0.1
+gamma = 0.05
 time_steps = 1000
 
 # record history for plotting   

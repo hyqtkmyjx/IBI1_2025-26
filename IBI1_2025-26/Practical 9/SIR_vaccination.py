@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 num_total = 10000
 I_num_init = 1  
 beta = 0.3      
-gamma = 0.1     
+gamma = 0.05 
 time_steps = 1000
 
-vaccination_rates = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]  # from 10% to 100% vaccination rates (10 levels)
+vaccination_rates = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]  # from 10% to 100% vaccination rates (10 levels)
 colors = ["#A23B72", "#F18F01", "#C73E1D", "#2E86AB", "#2ECC71"]
 
 # history records for all vaccination rates 
@@ -62,7 +62,7 @@ plt.figure(figsize=(10, 6), dpi=150)
 for idx, rate in enumerate(vaccination_rates):
     plt.plot(
         all_I_history[idx],
-        label=f"接种率 {rate*100}%",
+        label=f"Vaccination Rate {rate*100}%",
         color=colors[idx % len(colors)],  # 补充：避免颜色列表长度不足的潜在问题
         linewidth=1.5
     )
