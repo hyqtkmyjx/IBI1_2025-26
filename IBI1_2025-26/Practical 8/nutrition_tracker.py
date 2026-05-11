@@ -11,7 +11,9 @@ def calculate_nutrition(food_list):
     total_carbs = sum(food.carbs for food in food_list)
     total_protein = sum(food.protein for food in food_list)
     total_fat = sum(food.fat for food in food_list)
-
+    # Risk Warning:
+    # - If total calories > 2500 → Print warning: Warning: High calorie intake!
+    # - If total fat > 90 grams → Print warning: Warning: High fat intake!
     if total_calories > 2500:
         print("Warning: High calorie intake!")
     if total_fat > 90:
@@ -31,5 +33,6 @@ if __name__ == "__main__":
 
     normal_foods = [apple, chicken_breast, rice]
     unhealthy_foods = [burger, fried_chicken]
+    # Call the nutrition calculation function separately, passing in two lists, and output the total nutrition and warnings for each.
     calculate_nutrition(normal_foods)
     calculate_nutrition(unhealthy_foods)
