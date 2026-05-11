@@ -1,33 +1,36 @@
-# Start of the program
-# Define constants: maximum age, weight range, creatinine range, gender constants
-age = 100                     # Maximum age
-weightmax = 80                # Maximum weight
-weightmin = 20                # Minimum weight
-Crmax = 100                   # Maximum serum creatinine level
-Crmin = 0                     # Minimum serum creatinine level
-gentle1 = "male"              # Male identifier
-gentle2 = "female"            # Female identifier
+"""
+Calculate creatinine clearance rate using the Cockcroft-Gault formula
+Formula:
+- Male: CrCl = ((140 - age) * weight) / (72 * serum_creatinine)
+- Female: CrCl = ((140 - age) * weight) / (72 * serum_creatinine) * 0.85
+"""
+# Define valid input ranges
+MAX_AGE = 100
+MIN_WEIGHT = 20
+MAX_WEIGHT = 80
+MIN_CREATININE = 0
+MAX_CREATININE = 100
 
-# Input section
-# Prompt the user to enter age, weight, gender, and serum creatinine level, then convert to corresponding types
-a = int(input("Enter your age: "))
-b = int(input("Enter your weight: "))
-c = input("Enter your gender: ")
-Cr = int(input("Enter your serum creatinine level: "))
+# Get user input
+age = int(input("Enter your age: "))
+weight = int(input("Enter your weight (kg): "))
+gender = input("Enter your gender (male/female): ").lower()
+serum_creatinine = int(input("Enter your serum creatinine level (μmol/L): "))
 
-# Check if input values are outside the normal range
-# If age exceeds the maximum limit, or weight is out of range, or creatinine is out of range, 
-# or gender is neither male nor female, prompt an exception
-if a > age or b > weightmax or b < weightmin or Cr > Crmax or Cr < Crmin or c != gentle1 and c != gentle2 :
-    print("Your creatine clearance is not normal")
+# Validate input values
+if age > MAX_AGE:
+    print("Error: Age exceeds maximum limit of 100 years")
+elif weight < MIN_WEIGHT or weight > MAX_WEIGHT:
+    print(f"Error: Weight must be between {MIN_WEIGHT} and {MAX_WEIGHT} kg")
+elif serum_creatinine < MIN_CREATININE or serum_creatinine > MAX_CREATININE:
+    print(f"Error: Serum creatinine must be between {MIN_CREATININE} and {MAX_CREATININE} μmol/L")
+elif gender not in ["male", "female"]:
+    print("Error: Gender must be either 'male' or 'female'")
 else:
-    # All input values are within the normal range, start calculating creatinine clearance rate
-    if c == gentle1:
-        # Male calculation formula: (140 - age) * weight / (72 * serum creatinine)
-        CrCl = ((140 - a) * b) / (72 * Cr)
+    # Calculate creatinine clearance
+    if gender == "male":
+        crcl = ((140 - age) * weight) / (72 * serum_creatinine)
     else:
-        # Female calculation formula: male result * 0.85
-        CrCl = ((140 - a) * b) / (72 * Cr) * 0.85
-    # Output the calculation result, keeping four decimal places
-    print("Your creatine clearance is %.4f" % CrCl)
-# End of the program
+        crcl = ((140 - age) * weight) / (72 * serum_creatinine) * 0.85
+    
+    print(f"Your creatinine clearance is: {crcl:.4f} mL/min")

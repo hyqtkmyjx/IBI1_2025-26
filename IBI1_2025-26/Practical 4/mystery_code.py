@@ -1,5 +1,5 @@
 # What does this piece of code do?
-# Answer:
+# Answer:This code calculates the sum of 11 random integers between 1 and 10 (inclusive)
 
 # Import libraries
 # randint allows drawing a random number,

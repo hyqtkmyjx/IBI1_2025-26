@@ -1,65 +1,52 @@
-# Import the pyplot submodule from the matplotlib library (required for plotting)
 import matplotlib.pyplot as plt
 
-a = dict() # Initialize an empty dictionary to store gene-expression level mappings
-
-a = {
+# Initialize gene expression dictionary
+gene_expression = {
     'TP53': 12.4,
     'EGFR': 15.1,
     'BRCA1': 8.2,
     'PTEN': 5.3,
     'ESR1': 10.7,
 }
+print("Initial gene expression data:")
+print(gene_expression)
 
+# Add MYC gene to the dictionary
+gene_expression['MYC'] = 11.6
+print("\nGene expression data after adding MYC:")
+print(gene_expression)
 
-print(a)
+# Extract data for plotting
+genes = list(gene_expression.keys())
+expression_levels = list(gene_expression.values())
 
+# Create bar chart
+plt.figure(figsize=(10, 6), dpi=150)
+bars = plt.bar(genes, expression_levels, color='skyblue', edgecolor='black')
+plt.title('Gene Expression Levels Comparison', fontsize=14, pad=20)
+plt.xlabel('Genes', fontsize=12, labelpad=10)
+plt.ylabel('Expression Level', fontsize=12, labelpad=10)
 
-a['MYC'] = 11.6
-
-# Extract x-axis (gene names) and y-axis (expression levels) data from the dictionary
-genes = list(a.keys()) 
-expressions = list(a.values())  
-
-# Create and configure a bar chart for gene expression levels
-# Set figure size (units: inches)
-plt.figure(figsize=(10, 6))
-bars = plt.bar(genes, expressions, color='skyblue', edgecolor='black')
-
-plt.title('Compare Gene Expression Levels', fontsize=14, pad=20) 
-plt.xlabel('Genes', fontsize=12, labelpad=10)   
-plt.ylabel('Expression Level', fontsize=12, labelpad=10)     
-
-
+# Add value labels on top of bars
 for bar in bars:
-    height = bar.get_height()  
+    height = bar.get_height()
     plt.text(bar.get_x() + bar.get_width()/2., height + 0.2,
-             f'{height:.1f}', ha='center', va='bottom', fontsize=10) #f'{height:.1f}' ；
-            # ha='center'：，va='bottom'：
+             f'{height:.1f}', ha='center', va='bottom', fontsize=10)
 
-plt.ylim(0, max(expressions) + 2)
-
+plt.ylim(0, max(expression_levels) + 2)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
-
 plt.tight_layout()
-
 plt.show()
 
-x = input("请输入目标基因名称: ") 
-if x in a:
-    value = a.get(x)
-    print("{x}的表达量为: %.1f" %value)  
+# Query gene expression
+target_gene = "MYC"  # Modify this variable to query different genes
+if target_gene in gene_expression:
+    expression = gene_expression[target_gene]
+    print(f"\nExpression level of {target_gene}: {expression:.1f}")
 else:
-    print("目标基因不在列表中")
+    print(f"\nError: Gene {target_gene} not found in the dataset")
 
-
-
-values = list(a.values())
-# sum()
-total_expression = sum(values)
-# len()
-gene_num = len(values)
-average_expression = total_expression / gene_num
-
-# Print the average expression level 
-print(f"所有基因的平均表达量为：{average_expression:.2f}")
+# Calculate average gene expression
+total_expression = sum(expression_levels)
+average_expression = total_expression / len(expression_levels)
+print(f"\nAverage gene expression level: {average_expression:.2f}")
