@@ -35,19 +35,19 @@ def find_longest_orf_with_stop(seq, target_stop):
     return longest_codons
 
 def main():
-    # 1. Get user input for stop codon
+    # Get user input for stop codon
     while True:
         target_stop = input("Please enter a stop codon (TAA/TAG/TGA): ").strip().upper()
         if target_stop in {"TAA", "TAG", "TGA"}:
             break
         print("Invalid input! Please enter one of TAA, TAG, TGA.")
     
-    # 2. Read FASTA file (absolute path to avoid file not found error)
+    # Read FASTA file (absolute path to avoid file not found error)
     fasta_file = "/Users/hyq-mac/Desktop/2026春夏学期资料/IBI/IBI1_2025-26/Practical 7/Saccharomyces_cerevisiae.R64-1-1.cdna.all.fa"
     all_genes = read_fasta(fasta_file)
     print(f"Total genes read: {len(all_genes)}")
     
-    # 3. Count frequency of all codons (no merging)
+    # Count frequency of all codons (no merging)
     codon_counts = defaultdict(int)
     total_codons = 0
     
@@ -60,7 +60,7 @@ def main():
     print(f"\nGenes containing {target_stop} stop codon: {len([c for c in codon_counts.values() if c > 0])}")
     print(f"Total codons counted: {total_codons}")
     
-    # 4. Generate full codon frequency pie chart (show all 64 codons)
+    # Generate full codon frequency pie chart (show all 64 codons)
     # Sort codons by frequency in descending order
     sorted_codons = sorted(codon_counts.items(), key=lambda x: x[1], reverse=True)
     labels = [codon for codon, _ in sorted_codons]
