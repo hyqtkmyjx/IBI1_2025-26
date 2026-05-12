@@ -60,7 +60,7 @@ def main():
     print(f"\nGenes containing {target_stop} stop codon: {len([c for c in codon_counts.values() if c > 0])}")
     print(f"Total codons counted: {total_codons}")
     
-    # Generate full codon frequency pie chart (show all 64 codons)
+    # Generate full codon frequency pie chart 
     # Sort codons by frequency in descending order
     sorted_codons = sorted(codon_counts.items(), key=lambda x: x[1], reverse=True)
     labels = [codon for codon, _ in sorted_codons]

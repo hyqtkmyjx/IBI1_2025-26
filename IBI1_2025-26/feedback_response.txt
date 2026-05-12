@@ -1,0 +1,32 @@
+(Practical 3)
+
+Initial Problem: I struggled with the basic concepts of Git repositories and branching. I initially cloned the instructor's repository into the wrong local directory, which caused confusion when submitting my assignments. 
+Modifications Made:
+I moved all my practical files to the correct repository and organized them into separate folders for each week (Practical3 to Practical14)
+I learned to write descriptive commit messages that clearly state the changes made (e.g., "Add Practical3 files: Introductions.txt, thingsIlike.txt" instead of "new try")
+Learning Outcome: I now understand that Git is not just a file storage system but a powerful tool for tracking changes and collaborating on code. Clear commit messages are essential for both myself and others to understand the development history of a project.
+
+(Practical 4)
+
+Initial Problems: The Week 4 feedback highlighted several issues with my code:
+variables.py was missing comments explaining the result of the comparison and the truth table for the OR operation
+infection.py had a logical error where I rounded down the number of infected individuals each day, which led to an incorrect result (10 days instead of 9 days)
+mystery_code.py did not include a comment explaining what the code does
+creatine_clearance.py had Chinese comments and a generic error message that did not specify which input was invalid
+Modifications Made:
+Added detailed comments to variables.py including the result of the comparison (d = 250000, e = 220000 → d > e → decelerating) and the complete truth table for the OR operation
+Fixed the infection.py calculation by removing the daily rounding and only rounding the final output for readability, and added comprehensive pseudocode at the top of the file
+Added a clear comment to mystery_code.py explaining that it "calculates the sum of 11 random integers between 1 and 10 (inclusive)"
+Rewrote all comments in creatine_clearance.py in English and replaced the generic error message with specific messages for each invalid input (e.g., "Error: Age exceeds maximum limit of 100 years")
+Learning Outcome: I learned that code documentation is just as important as the code itself. Well-written comments and pseudocode make code easier to understand, debug, and maintain. I also realized the importance of carefully checking boundary conditions and logical flow to avoid calculation errors.
+
+(Practical 5)
+
+Initial Problems: The Week 5 feedback identified two main issues:
+In the heart rate analysis script, I incorrectly excluded 60 bpm from the normal category (used a[i] > 60 instead of a[i] >= 60)
+The population change bar chart had Chinese labels, which did not meet the course's English language requirement
+Modifications Made:
+Corrected the heart rate classification condition to 60 <= rate <= 120, which properly includes both 60 and 120 bpm in the normal category
+Translated all labels and titles in the population change chart to English (e.g., "Country" instead of "国家", "Population Change (%)" instead of "人口百分比变化（%）")
+Standardized all my visualization code to use English labels and consistent formatting
+Learning Outcome: I developed a better understanding of how to correctly implement classification logic and the importance of paying attention to boundary values. I also learned that academic programming requires strict adherence to language standards to ensure clarity and accessibility.
